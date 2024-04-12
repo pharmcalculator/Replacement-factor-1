@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Suppository Calculation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 28px;
+      margin-top: 40px;
+      margin-bottom: 10px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .table-container {
+      margin: 0 20px;
+    }
+
+    table {
+      margin: 0 auto;
+      border-collapse: collapse;
+      width: 600px;  
+      font-size: 24px;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    input[type="number"] {
+      width: 100px;
+      font-size: 24px;
+     
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 28px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .result-table {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    .result-table th {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .result-table td {
+      padding: 20px;
+    }
+
+    p {
+      font-size: 24px;
+    }
+
+    body {
+      font-size: 24px;    
+    }
+  </style>
+   <script>
+    function calculateSuppository() {
+      // Get the input values from the form
+      var weightPureBase = parseFloat(document.getElementById("weightPureBase").value);
+      var weightSuppository = parseFloat(document.getElementById("weightSuppository").value);
+      var activeIngredientPercentage = parseFloat(document.getElementById("activeIngredientPercentage").value);
+      
+      // Perform the calculation
+      var replacementFactor = 1 + ((weightPureBase - weightSuppository) / (weightSuppository * activeIngredientPercentage / 100));
+      
+      // Display the result with the equation
+      var resultText = "The replacement factor is calculated using the equation: F = 1 + ((E - G) / (G * x / 100))";
+      resultText += "<br>";
+      resultText += "Where F is the replacement factor, E is the weight of the pure base, G is the weight of the suppository with x% of the active ingredient.";
+      resultText += "<br><br>";
+      resultText += "The replacement factor is: " + replacementFactor.toFixed(2);
+      
+      document.getElementById("replacementFactorResult").innerHTML = resultText;
+    }
+  </script>
+</head>
+<body>
+  <h1>Suppository Calculator</h1>
+  <form>
+    <label for="weightPureBase">Weight of Pure Base E (g):</label>
+    <input type="number" id="weightPureBase" step="0.01" required><br><br>
+    
+    <label for="weightSuppository">Weight of the medicated Suppository G (g):</label>
+    <input type="number" id="weightSuppository" step="0.01" required><br><br>
+    
+    <label for="activeIngredientPercentage">Active Ingredient Percentage (%):</label>
+    <input type="number" id="activeIngredientPercentage" step="0.01" required><br><br>
+    
+    <button type="button" onclick="calculateSuppository()">Calculate</button>
+  </form>
+  
+  <p id="replacementFactorResult"></p>
+</body>
+</html>
+
